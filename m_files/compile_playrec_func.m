@@ -61,7 +61,7 @@ pa_common_files = {'src/common/pa_allocation.c',...
                    'src/common/pa_dither.c',...
                    'src/common/pa_front.c',...
                    'src/common/pa_process.c',...
-                   'src/common/pa_skeleton.c',...
+                   'src/hostapi/skeleton/pa_hostapi_skeleton.c',...
                    'src/common/pa_stream.c',...
                    'src/common/pa_trace.c'};
 pa_os_specific_files = {};
@@ -95,8 +95,6 @@ if is_os('MAC')
                           'host/mac/codefragements.cpp'})];
 
         compiler_flags = [compiler_flags, {'PA_USE_ASIO'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_ASIO'}];
     end
 
     if use_coreaudio
@@ -105,9 +103,7 @@ if is_os('MAC')
                                   'src/hostapi/coreaudio/pa_mac_core_utilities.c',...
                                   'src/hostapi/coreaudio/pa_mac_core_blocking.c'}];
 
-        compiler_flags = [compiler_flags, {'PA_USE_COREAUDIO'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_COREAUDIO'}];
+        compiler_flags = [compiler_flags, {'PA_USE_COREAUDIO'}];    
     end
     
     if use_jack
@@ -115,8 +111,6 @@ if is_os('MAC')
                                  {'src/hostapi/jack/pa_jack.c'}];
                                        
         compiler_flags = [compiler_flags, {'PA_USE_JACK'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_JACK'}];
     end        
 elseif is_os('WIN')
     compiler_flags = [compiler_flags, {'WIN32'}];
@@ -153,8 +147,6 @@ elseif is_os('WIN')
                          'host/pc/asiolist.cpp'})];
 
         compiler_flags = [compiler_flags, {'PA_USE_ASIO'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_ASIO'}];
     end
 
     if use_dsound
@@ -171,8 +163,6 @@ elseif is_os('WIN')
         lib_dirs = [lib_dirs, resolve_paths(dsound_path, {'lib/x86'})];
 
         compiler_flags = [compiler_flags, {'PA_USE_DS'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_DS'}];
     end
 
     if use_wasapi
@@ -181,8 +171,6 @@ elseif is_os('WIN')
         link_libs = [link_libs, {'uuid.lib'}];
         
         compiler_flags = [compiler_flags, {'PA_USE_WASAPI'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_WASAPI'}];
     end
 
     if use_wdmks
@@ -193,8 +181,6 @@ elseif is_os('WIN')
         link_libs = [link_libs, {'setupapi.lib'}];
         
         compiler_flags = [compiler_flags, {'PA_USE_WDMKS'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_WDMKS'}];
     end
 
     if use_wmme
@@ -202,8 +188,6 @@ elseif is_os('WIN')
                                  {'src/hostapi/wmme/pa_win_wmme.c'}];
 
         compiler_flags = [compiler_flags, {'PA_USE_WMME'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_WMME'}];
     end
 else
     pa_os_specific_files = [pa_os_specific_files, ...
@@ -219,8 +203,6 @@ else
         extra_flags = [extra_flags, {'-lasound'}];
 
         compiler_flags = [compiler_flags, {'PA_USE_ALSA'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_ALSA'}];
     end
 
     if use_asihpi
@@ -228,17 +210,15 @@ else
                                  {'src/hostapi/asihpi/pa_linux_asihpi.c'}];
 
         compiler_flags = [compiler_flags, {'PA_USE_ASIHPI'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_ASIHPI'}];
     end
 
     if use_jack
         pa_api_specific_files = [pa_api_specific_files,...
                                  {'src/hostapi/jack/pa_jack.c'}];
-                                       
+
+        extra_flags = [extra_flags, {'-ljack'}];
+                             
         compiler_flags = [compiler_flags, {'PA_USE_JACK'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_JACK'}];
     end
     
     if use_oss
@@ -246,8 +226,6 @@ else
                                  {'src/hostapi/oss/pa_unix_oss.c'}];
 
         compiler_flags = [compiler_flags, {'PA_USE_OSS'}];
-    else
-        compiler_flags = [compiler_flags, {'PA_NO_OSS'}];
     end
 end
 
