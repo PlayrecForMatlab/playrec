@@ -226,6 +226,11 @@ else
                                  {'src/hostapi/oss/pa_unix_oss.c'}];
 
         compiler_flags = [compiler_flags, {'PA_USE_OSS'}];
+
+        % OSS needs some system specific defines. Following one work on
+        % Linux, but might not work for other UNIX like BSD.
+        compiler_flags = [compiler_flags, {'HAVE_SYS_SOUNDCARD_H'}];
+        compiler_flags = [compiler_flags, {'HAVE_LINUX_SOUNDCARD_H'}];
     end
 end
 
