@@ -24,6 +24,9 @@ else
     verbose = 0;
 end
 
+%use std=c99 as this is needed for portaudio
+build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
+
 %deal with specified options file
 if nargin > 9 && ~isempty(optionsfile) && ischar(optionsfile)
     % -f and option file name go as two seperate arguments
