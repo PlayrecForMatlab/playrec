@@ -1,0 +1,7 @@
+Extract the required SDKs into subfolders in this directory.
+
+PortAudio will always be needed.
+
+The ASIO SDK should also be placed here if ASIO support is required.
+
+For further information see the 'Getting Started' section at www.playrec.co.uk
