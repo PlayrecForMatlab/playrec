@@ -79,20 +79,20 @@ api_wasapi = 0;
 api_wdmks = 0;
 api_wmme = 0;
 
-if length(varargin) >= 1
-    set(handles.api_asio_path_textbox,'String', varargin{1});
-end
-
 if length(varargin) >= 2
-    set(handles.api_dsound_path_textbox,'String', varargin{2});
+    set(handles.api_asio_path_textbox,'String', varargin{2});
 end
 
 if length(varargin) >= 3
-    set(handles.pa_path_textbox,'String', varargin{3});
+    set(handles.api_dsound_path_textbox,'String', varargin{3});
 end
 
 if length(varargin) >= 4
-    set(handles.sdk_path_textbox,'String', varargin{4});
+    set(handles.pa_path_textbox,'String', varargin{4});
+end
+
+if length(varargin) >= 5
+    set(handles.sdk_path_textbox,'String', varargin{5});
 end
 
 

@@ -148,7 +148,7 @@ extern bool mexFunctionCalled(int nlhs, mxArray *plhs[],
  * supplied when calling the MEX-file from MATLAB).
  */
 extern const FuncLookupStruct _funcLookup[];
-extern const int _funcLookupSize;
+extern const unsigned int _funcLookupSize;
 
 #ifdef __cplusplus
 }

@@ -122,10 +122,10 @@ bool mexFunctionCalled(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[
  */
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
-    int i;
+    unsigned int i;
     bool validFuncName = false;
     bool validArgNumber;
-    unsigned int charCount, maxFuncNameLen = 0;
+    size_t charCount, maxFuncNameLen = 0;
     char *namebuf;
 
     if(!mexFunctionCalled(nlhs, plhs, nrhs, prhs))
@@ -167,7 +167,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
                                          "inputArgs", "outputArgs"};
             const char *paramFieldNames[] = {"name", "description", "isOptional"};
 
-            int argCount, argNum;
+            unsigned int argCount, argNum;
             mxArray *pParamFields;
 
             plhs[0] = mxCreateStructMatrix(1, _funcLookupSize,
@@ -335,7 +335,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
  *
  */
 bool showHelp(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
-    int i, argNum;
+    unsigned int i, argNum;
     bool validFuncName, firstParam;
     char *namebuf;
 

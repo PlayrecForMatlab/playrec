@@ -760,7 +760,7 @@ const FuncLookupStruct _funcLookup[] = {
 };
 
 /* The number of elements in the above structure array */
-const int _funcLookupSize = sizeof(_funcLookup)/sizeof(FuncLookupStruct);
+const unsigned int _funcLookupSize = sizeof(_funcLookup)/sizeof(FuncLookupStruct);
 
 /* Pointer to the only StreamInfoStruct */
 StreamInfoStruct *_pstreamInfo;
@@ -1802,7 +1802,7 @@ bool channelListToChanBufStructs(const mxArray *pmxChanArray, ChanBufStruct **pp
         return false;
     }
 
-    chanUseCount = mxGetN(pmxChanArray);
+    chanUseCount = (unsigned int)mxGetN(pmxChanArray);
     pchanList = mxGetPr(pmxChanArray);
 
     /* Check all channel values are unique */
@@ -1970,8 +1970,8 @@ bool addPlayrecPage(mxArray **ppmxPageNum, const mxArray *pplayData,
         }
 
         /* Copy across all data */
-        dataChanCount = mxGetN(pplayData);
-        playSamplePerChan = mxGetM(pplayData);
+        dataChanCount = (unsigned int) mxGetN(pplayData);
+        playSamplePerChan = (unsigned int) mxGetM(pplayData);
 
         psps->pageLength = max(psps->pageLength, playSamplePerChan);
 
@@ -3069,7 +3069,7 @@ bool doGetRec(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
  * TODO:
  */
 bool doGetSampleRate(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
-    PaStreamInfo *streamInfo;
+    const PaStreamInfo *streamInfo;
 
     if(!_pstreamInfo) {
         plhs[0] = mxCreateDoubleScalar(-1);
@@ -3339,7 +3339,7 @@ bool doGetRecMaxChannel(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs
  * TODO:
  */
 bool doGetPlayLatency(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
-    PaStreamInfo *streamInfo;
+    const PaStreamInfo *streamInfo;
 
     if(!_pstreamInfo || (_pstreamInfo->playDeviceID == paNoDevice)) {
         plhs[0] = mxCreateDoubleScalar(-1);
@@ -3390,7 +3390,7 @@ bool doGetPlayLatency(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]
  * TODO:
  */
 bool doGetRecLatency(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
-    PaStreamInfo *streamInfo;
+    const PaStreamInfo *streamInfo;
 
     if(!_pstreamInfo || (_pstreamInfo->recDeviceID == paNoDevice)) {
         plhs[0] = mxCreateDoubleScalar(-1);
@@ -3807,7 +3807,7 @@ __DATE__ " at " __TIME__ "\nBuilt with defines: "
     PaHostApiIndex i;
     const PaHostApiInfo *apiInfo;
 
-    int bufLen = strlen(aboutString);
+    size_t bufLen = strlen(aboutString);
 
     char *buffer, *write_point;
 

@@ -49,5 +49,5 @@ end
 if is_octave
     compile_playrec_cmd(asio_path, dsound_path, pa_path);
 else
-    compile_playrec_gui(asio_path, dsound_path, pa_path);
+    compile_playrec_gui('', asio_path, dsound_path, pa_path);
 end

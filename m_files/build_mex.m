@@ -10,6 +10,11 @@ abort = 0;
 %accumulate the various options into a single arguments list
 build_args = {};
 
+if ~is_octave
+    build_args = {build_args{:}, '-compatibleArrayDims'};
+%    build_args = {build_args{:}, '-largeArrayDims'};
+end
+
 %deal with debug argument
 if nargin > 7 && ~isempty(debug) && debug
     build_args = {build_args{:}, '-g'};
@@ -24,8 +29,11 @@ else
     verbose = 0;
 end
 
-%use std=c99 as this is needed for portaudio
-build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
+%use std=c99 as this is needed for portaudio,
+%but not when compiling on Windows with Microsoft compiler
+if is_octave
+    build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
+end
 
 %deal with specified options file
 if nargin > 9 && ~isempty(optionsfile) && ischar(optionsfile)
