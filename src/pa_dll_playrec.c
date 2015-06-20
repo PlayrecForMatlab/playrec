@@ -36,6 +36,7 @@
 #include "mex_dll_core.h"
 #include "pa_dll_playrec.h"
 #include <string.h>
+#include <stdio.h>
 
 /*
  * States are used to ensure code is only run when it will not cause problems

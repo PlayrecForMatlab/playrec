@@ -36,8 +36,8 @@ extern "C"
 #include "mex.h"
 #include "portaudio.h"
 
-#define VERSION "2.1.0"
-#define DATE "15 April 2008"
+#define VERSION "2.1.1"
+#define DATE "20 June 2015"
 #define AUTHOR "Robert Humphrey"
 
 /* The mx class equivalent to unsigned int */

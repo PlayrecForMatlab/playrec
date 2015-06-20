@@ -30,8 +30,9 @@ else
 end
 
 %use std=c99 as this is needed for portaudio,
-%but not when compiling on Windows with Microsoft compiler
-if is_octave
+%but not when compiling on Windows with Microsoft compiler,
+%or using Octave on Ubuntu
+if ~is_octave && ~is_os('WIN')
     build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
 end
 
