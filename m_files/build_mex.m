@@ -29,12 +29,15 @@ else
     verbose = 0;
 end
 
-%use std=c99 as this is needed for portaudio,
-%but not when compiling on Windows with Microsoft compiler,
-%or using Octave on Ubuntu
-if ~is_octave && ~is_os('WIN')
-    build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
-end
+%use std=c99 as this is needed for portaudio.
+%Not sure what systems do need this enabled, as not necessary with:
+% Windows with Matlab 2015a & Windows SDK compiler
+% Ubuntu with Octave and standard compiler options
+%
+% If you find this is necessary, please let rob@playrec.co.uk know,
+% specifying the exact system you're using and what options you're
+% compiling
+%build_args = {build_args{:}, 'CFLAGS="\$CFLAGS\ -std=c99"'};
 
 %deal with specified options file
 if nargin > 9 && ~isempty(optionsfile) && ischar(optionsfile)
