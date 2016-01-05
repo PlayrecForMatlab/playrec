@@ -57,7 +57,7 @@ Clone the playrec repository from github
 ####Ubuntu:
 ```
 % sudo apt-get install cmake 
-% sudo apt-get install libportaudio-dev
+% sudo apt-get install portaudio19-dev
 ```
 
 ####Mac: 
@@ -82,7 +82,7 @@ Windows: To be verified. Should work.
 
 On Matlab command prompt at playrec directory:
 ```
->> playrec'(about')
+>> playrec('about')
 ```
 
 Clone playrec-examples from
