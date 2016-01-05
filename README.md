@@ -58,6 +58,7 @@ Clone the playrec repository from github
 ```
 % sudo apt-get install cmake 
 % sudo apt-get install portaudio19-dev
+% export MATLAB_ROOT=/opt/MATLAB/R2015b
 ```
 
 ####Mac: 
@@ -65,10 +66,12 @@ Clone the playrec repository from github
 ```
 % brew install cmake
 % brew install portaudio
+% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app
 ```
 
 ####Compile:
 ```
+
 % cd playrec
 % mkdir build; cd build
 % cmake ..
