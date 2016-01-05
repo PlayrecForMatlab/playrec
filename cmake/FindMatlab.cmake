@@ -1,0 +1,92 @@
+# - this module looks for Matlab
+# Defines:
+#  MATLAB_INCLUDE_DIR: include path for mex.h
+#  MATLAB_LIBRARIES:   required libraries: libmex, libmx
+#  MATLAB_MEX_LIBRARY: path to libmex
+
+SET(MATLAB_FOUND 0)
+IF( "$ENV{MATLAB_ROOT}" STREQUAL "" )
+    MESSAGE(STATUS "MATLAB_ROOT environment variable not set." )
+    MESSAGE(STATUS "In Linux this can be done in your user .bashrc file by appending the corresponding line, e.g:" )
+    MESSAGE(STATUS "export MATLAB_ROOT=/usr/local/MATLAB/R2012b" )
+    MESSAGE(STATUS "In Windows this can be done by adding system variable, e.g:" )
+    MESSAGE(STATUS "MATLAB_ROOT=D:\\Program Files\\MATLAB\\R2011a" )
+ELSE("$ENV{MATLAB_ROOT}" STREQUAL "" )
+
+        FIND_PATH(MATLAB_INCLUDE_DIR mex.h
+                  $ENV{MATLAB_ROOT}/extern/include)
+
+        INCLUDE_DIRECTORIES(${MATLAB_INCLUDE_DIR})
+
+        FIND_PATH( MATLAB_LINUX64_MEX_LIBRARY
+                   NAMES libmex.so
+                   PATHS $ENV{MATLAB_ROOT}/bin/glnxa64 
+                   NO_DEFAULT_PATH)
+
+        FIND_PATH( MATLAB_LINUX32_MEX_LIBRARY
+                   NAMES libmex.so
+                   PATHS $ENV{MATLAB_ROOT}/bin/glnx86 
+                   NO_DEFAULT_PATH)
+
+        FIND_PATH( MATLAB_MAC_MEX_LIBRARY
+                   NAMES libmex.dylib
+                   PATHS $ENV{MATLAB_ROOT}/bin/maci64
+                   NO_DEFAULT_PATH)
+
+        FIND_PATH( MATLAB_WIN64_MEX_LIBRARY
+                   NAMES libmex.dll mex.dll
+                   PATHS $ENV{MATLAB_ROOT}/bin/win64
+                   NO_DEFAULT_PATH)
+
+        FIND_PATH( MATLAB_WIN32_MEX_LIBRARY
+                   NAMES libmex.dll mex.dll
+                   PATHS $ENV{MATLAB_ROOT}/bin/win32
+                   NO_DEFAULT_PATH)
+
+ENDIF("$ENV{MATLAB_ROOT}" STREQUAL "" )
+
+IF (MATLAB_LINUX64_MEX_LIBRARY)
+       SET (MATLAB_MEX_LIBRARY ${MATLAB_LINUX64_MEX_LIBRARY})
+       SET (MATLAB_MEX_SUFFIX ".mexa64")
+ENDIF (MATLAB_LINUX64_MEX_LIBRARY)
+
+IF (MATLAB_LINUX32_MEX_LIBRARY)
+       SET (MATLAB_MEX_LIBRARY ${MATLAB_LINUX32_MEX_LIBRARY})
+       SET (MATLAB_MEX_SUFFIX ".mexglx")
+ENDIF (MATLAB_LINUX32_MEX_LIBRARY)
+
+IF (MATLAB_MAC_MEX_LIBRARY)
+       SET (MATLAB_MEX_LIBRARY ${MATLAB_MAC_MEX_LIBRARY})
+       SET (MATLAB_MEX_SUFFIX ".mexmaci64")
+ENDIF (MATLAB_MAC_MEX_LIBRARY)
+
+IF (MATLAB_WIN64_MEX_LIBRARY)
+       SET (MATLAB_MEX_LIBRARY ${MATLAB_WIN64_MEX_LIBRARY})
+       SET (MATLAB_MEX_SUFFIX ".mexw64")
+ENDIF (MATLAB_WIN64_MEX_LIBRARY)
+
+IF (MATLAB_WIN32_MEX_LIBRARY)
+       SET (MATLAB_MEX_LIBRARY ${MATLAB_WIN32_MEX_LIBRARY})
+       SET (MATLAB_MEX_SUFFIX ".mexw32")
+ENDIF (MATLAB_WIN32_MEX_LIBRARY)
+
+
+SET(MATLAB_MEX_LINK_FLAGS -L${MATLAB_MEX_LIBRARY} "-lmx -lmex -lmat -lmwservices -lut")
+
+IF(MATLAB_INCLUDE_DIR AND MATLAB_MEX_LINK_FLAGS)
+  SET(MATLAB_FOUND 1)
+  MESSAGE(STATUS "Matlab found:")
+  MESSAGE (STATUS "   MATLAB_ROOT: $ENV{MATLAB_ROOT}") 
+  MESSAGE (STATUS "   MATLAB_MEX_LIBRARY: ${MATLAB_MEX_LIBRARY}") 
+  MESSAGE (STATUS "   MATLAB_MEX_SUFFIX: ${MATLAB_MEX_SUFFIX}") 
+ELSE(MATLAB_INCLUDE_DIR AND MATLAB_MEX_LINK_FLAGS)
+  MESSAGE(STATUS "Matlab not found")
+ENDIF(MATLAB_INCLUDE_DIR AND MATLAB_MEX_LINK_FLAGS)
+
+MARK_AS_ADVANCED(
+  MATLAB_MEX_LINK_FLAGS
+  MATLAB_MEX_SUFFIX
+  MATLAB_INCLUDE_DIR
+  MATLAB_FOUND
+  MATLAB_ROOT
+)
