@@ -90,7 +90,8 @@ Clone playrec-examples from
 % git clone git@github.com:PlayrecForMatlab/playrec-examples.git
 ```
 
-Add playrec to Matlab path and execute
+Add playrec to Matlab path and execute test_playrec.m from
+playrec-examples directory
 ```
 >> test_playrec
 ```
