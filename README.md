@@ -51,34 +51,46 @@ platforms and with all host APIs that PortAudio supports.
 To use this utility it must first be downloaded and compiled. 
 
 Clone the playrec repository from github
+```
  % git clone git@github.com:hbe72/playrec.git
-
-Ubuntu:
+```
+####Ubuntu:
+```
   % sudo apt-get install cmake 
   % sudo apt-get install libportaudio-dev
+```
 
-Mac: 
+####Mac: 
   Install homebrew install homebrew (see. brew.sh)
+```
   % brew install cmake
   % brew install portaudio
+```
 
-Compile:
+####Compile:
+```
    % cd playrec
    % mkdir build; cd build
    % cmake ..
    % make
    % make install
+```
    
-Windows:
-To be verified. Should work.
+Windows: To be verified. Should work.
 
 ### Test the installation
 
 On Matlab command prompt at playrec directory:
->> playrec'(about')
+```
+  >> playrec'(about')
+```
 
 Clone playrec-examples from
- % git clone git@github.com:PlayrecForMatlab/playrec-examples.git
+```
+  % git clone git@github.com:PlayrecForMatlab/playrec-examples.git
+```
 
 Add playrec to Matlab path and execute
+```
 >> test_playrec
+```
