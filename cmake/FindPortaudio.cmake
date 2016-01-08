@@ -18,10 +18,10 @@ if (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
   # in cache already
   set(PORTAUDIO_FOUND TRUE)
 else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
-  if (NOT WIN32)
+  if ((NOT WIN32) OR MINGW)
    include(FindPkgConfig)
    pkg_check_modules(PORTAUDIO2 portaudio-2.0)
-  endif (NOT WIN32)
+  endif ((NOT WIN32) OR MINGW)
 
   if (PORTAUDIO2_FOUND)
     set(PORTAUDIO_INCLUDE_DIRS
