@@ -84,14 +84,14 @@ Clone the playrec repository from github
 #### Compilation from scratch from portaudio sources:
 ##### Ubuntu, Mac & MinGW
 ```
- % mkdir portaudio; cd portaudio
+% mkdir portaudio; cd portaudio
 % ../playrec/compile_portaudio.sh [installation directory]
 ```
 
 See further instructions from the end of compile_portaudio.sh for setting the
 environment variables
 ```
- % export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
+% export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
 % export MATLAB_ROOT=/Applications/MATLAB_R2015b.app  
 % cd ../playrec 
 % mkdir build; cd build 
