@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Without any command line parameters, this should be executed
+# in the directory you want to install portaudio.
+# Usage: ./compile_portaudio.sh [installation directory] [--debug-build]
+#
+# If Matlab installation is 64-bit, please use 64-bit installation of
+# MinGW tools such as TDM-GCC for compiling portaudio for playrec
+
 TARGET_DIR=$1
 
 if test "x$2" == "x--debug-build";
@@ -66,7 +73,7 @@ cd $build_dir
 
 ../portaudio/configure --enable-static --prefix=$install_prefix
 make -j8 || eexit "Building portaudio failed"
-#make install || eexit "Install of portaudio failed"
+make install || eexit "Install of portaudio failed"
 
 # For compiling playrec in all platforms (Mac OS X, Linux, MinGW-MSYS)
 # export PKG_CONFIG_PATH=$install_prefix/lib/pkgconfig:$PKG_CONFIG_PATH

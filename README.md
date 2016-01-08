@@ -54,34 +54,48 @@ Clone the playrec repository from github
 ```
 % git clone git@github.com:hbe72/playrec.git
 ```
-####Ubuntu:
+####Compilation with system's installation of portaudio
+
+#####Ubuntu:
 ```
 % sudo apt-get install cmake 
 % sudo apt-get install portaudio19-dev
 % export MATLAB_ROOT=/opt/MATLAB/R2015b
 ```
 
-####Mac: 
+#####Mac: 
   Install homebrew install homebrew (see. brew.sh)
 ```
 % brew install cmake
 % brew install portaudio
-% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app
+% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app 
 ```
 
-####Compile:
+#####Compile:
 ```
 
-% cd playrec
-% mkdir build; cd build
-% cmake ..
-% make
-% make install
+% cd playrec 
+% mkdir build; cd build 
+% cmake .. 
+% make 
+% make install 
 ```
-   
-Windows: To be verified. Should work.
+#### Compilation from scratch from portaudio sources:
+##### Ubuntu, Mac & MinGW
+% mkdir portaudio; cd portaudio
+% ../playrec/compile_portaudio.sh [installation directory]
 
-### Test the installation
+See further instructions from the end of compile_portaudio.sh for setting the
+environment variables
+% export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
+% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app  
+% cd ../playrec 
+% mkdir build; cd build 
+% cmake .. 
+% make 
+% make install 
+
+#### Test the installation
 
 On Matlab command prompt at playrec directory:
 ```
