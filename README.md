@@ -48,7 +48,7 @@ By using PortAudio to access the soundcard, Playrec should function on all
 platforms and with all host APIs that PortAudio supports.
 
 ### Download and compilation with cmake
-cmake based build will install playrec.mex<os> to the top level of
+cmake based build will install playrec.mex to the top level of
 playrec source directory. It can be moved from there to desired location.
 
 Clone the playrec repository from github
