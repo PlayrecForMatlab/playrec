@@ -48,7 +48,8 @@ By using PortAudio to access the soundcard, Playrec should function on all
 platforms and with all host APIs that PortAudio supports.
 
 ### Download and compilation with cmake
-To use this utility it must first be downloaded and compiled. 
+cmake based build will install playrec.mex<os> to the top level of
+playrec source directory. It can be moved from there to desired location.
 
 Clone the playrec repository from github
 ```
@@ -82,18 +83,22 @@ Clone the playrec repository from github
 ```
 #### Compilation from scratch from portaudio sources:
 ##### Ubuntu, Mac & MinGW
-% mkdir portaudio; cd portaudio
+```
+ % mkdir portaudio; cd portaudio
 % ../playrec/compile_portaudio.sh [installation directory]
+```
 
 See further instructions from the end of compile_portaudio.sh for setting the
 environment variables
-% export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+ % export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
 % export MATLAB_ROOT=/Applications/MATLAB_R2015b.app  
 % cd ../playrec 
 % mkdir build; cd build 
 % cmake .. 
 % make 
 % make install 
+```
 
 #### Test the installation
 
