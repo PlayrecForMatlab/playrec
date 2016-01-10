@@ -43,6 +43,7 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
       NAMES
         portaudio.h
       PATHS
+		../portaudio/include
         /usr/include
         /usr/local/include
         /opt/local/include
@@ -52,7 +53,10 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
     find_library(PORTAUDIO_LIBRARY
       NAMES
         portaudio
+		portaudio_static_x64
+		portaudio_static_x86
       PATHS
+		../portaudio/lib	  
         /usr/lib
         /usr/local/lib
         /opt/local/lib
@@ -62,7 +66,10 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
     find_path(PORTAUDIO_LIBRARY_DIR
       NAMES
         portaudio
+		portaudio_static_x64
+ 		portaudio_static_x86       
       PATHS
+		../portaudio/lib	  
         /usr/lib
         /usr/local/lib
         /opt/local/lib

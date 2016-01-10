@@ -10,11 +10,19 @@ set(PLAYREC_HEADER_FILES
    mex_dll_core.h
   )  
 
-include_directories(${MATLAB_INCLUDE_DIR} ${PORTAUDIO_INCLUDE_DIRS})
+include_directories(${MATLAB_INCLUDE_DIRS} ${PORTAUDIO_INCLUDE_DIRS})
+link_directories(${MATLAB_LIBRARY_DIRS})
 
 add_library(playrec SHARED ${PLAYREC_SOURCE_FILES})
-target_link_libraries(playrec ${MATLAB_MEX_LINK_FLAGS} ${PORTAUDIO_LIBRARIES})
-SET_TARGET_PROPERTIES(playrec PROPERTIES SUFFIX ${MATLAB_MEX_SUFFIX} PREFIX "") 
+target_link_libraries(playrec ${MATLAB_LIBRARIES} ${PORTAUDIO_LIBRARIES})
+set_target_properties(playrec PROPERTIES SUFFIX ${MATLAB_MEX_SUFFIX} 
+                                         PREFIX "") 
+if (NOT ${MATLAB_COMP_FLAGS} MATCHES "")
+  set_target_properties(playrec PROPERTIES COMP_FLAGS ${MATLAB_COMP_FLAGS}) 
+endif (NOT ${MATLAB_COMP_FLAGS} MATCHES "")
+if (MATLAB_LINK_FLAGS)
+  set_target_properties(playrec PROPERTIES LINK_FLAGS ${MATLAB_LINK_FLAGS}) 
+endif (MATLAB_LINK_FLAGS)
 
 install(TARGETS playrec DESTINATION .)
 #INSTALL(FILES playrec.m DESTINATION .)

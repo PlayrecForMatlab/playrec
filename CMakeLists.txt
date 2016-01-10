@@ -1,11 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_COMPILER g++)
-
 project(PLAYREC)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-add_definitions(/DMATLAB_MEX_FILE) #define matlab macros
 
 #CMake 'debug' build does an optimized build?
 #TODO: Q&D now -check for compiler, and move to a separate file
