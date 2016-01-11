@@ -131,6 +131,7 @@ to the portaudio subdirectory beside playrec subdirectory for
 FindPortaudio.cmake to find it.
 
 ###### Build playrec
+Have MATLAB_ROOT environment variable point to Matlab installation directory
 ```
 > cd ../../playrec
 > mkdir build
