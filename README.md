@@ -99,6 +99,44 @@ environment variables
 % make 
 % make install 
 ```
+##### Windows with Visual Studio
+Suggested directory structure for FindPortaudio.cmake 
+```
+----- portaudio  ----- portaudio
+     |                           |
+     |                           -- ASIOSDK2.3
+     |                           |
+     |                           -- build
+     |                           -- lib
+     |                           -- bin
+     |                           -- include
+      -- playrec
+```
+Thus download and uncompress portaudio and asiosdk accordingly from
+http://www.portaudio.com/archives/pa_snapshot.tgz and http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip
+
+Open "VS<version> x64 Cross Tools Command Prompt" and browse to
+portaudio subdirectory
+###### Build portaudio
+```
+> mkdir build
+> cd build
+> cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=<portaudio_install_dir> -DCMAKE_BUILD_TYPE=Release ../portaudio
+> nmake /f Makefile
+> nmake /f Makefile install
+```
+Thus installation is done to lib, bin and include subdirectories of
+portaudio_install_dir. portaudio_install_dir has to be absolute path
+to the portaudio subdirectory beside playrec subdirectory for
+FindPortaudio.cmake to find it.
+
+###### Build playrec
+> cd ../../playrec
+> mkdir build
+> cd build
+> cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+> nmake /f Makefile
+> nmake /f Makefile install
 
 #### Test the installation
 

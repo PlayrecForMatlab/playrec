@@ -6,6 +6,17 @@
 #
 # If Matlab installation is 64-bit, please use 64-bit installation of
 # MinGW tools such as TDM-GCC for compiling portaudio for playrec
+# Creates following directory structure:
+# current directory ----- portaudio
+#                     |
+#                      -- ASIOSDK2.3
+#                     |
+#                      -- build
+# Executes configure and make in build subdirectory.
+#
+# Without any parameters, installation is done to current directory
+# to subdirectories include, lib. In addition in mingw dll will be in bin
+# subdirectory
 
 TARGET_DIR=$1
 
@@ -25,8 +36,6 @@ portaudio_release_url=http://www.portaudio.com/archives
 portaudio_tgz=pa_snapshot.tgz #Latest snapshot
 steinberg_asio_url=http://www.steinberg.net/sdk_downloads
 steinberg_asio_zip=asiosdk2.3.zip
-
-build_dir=build
 
 function eexit {
    echo $1
@@ -68,10 +77,11 @@ else
    install_prefix=$1
 fi
 
+build_dir=build
 mkdir -p $build_dir
 cd $build_dir
 
-../portaudio/configure --enable-static --prefix=$install_prefix
+../portaudio/configure --prefix=$install_prefix
 make -j8 || eexit "Building portaudio failed"
 make install || eexit "Install of portaudio failed"
 
