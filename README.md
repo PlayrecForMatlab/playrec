@@ -131,12 +131,14 @@ to the portaudio subdirectory beside playrec subdirectory for
 FindPortaudio.cmake to find it.
 
 ###### Build playrec
+```
 > cd ../../playrec
 > mkdir build
 > cd build
 > cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 > nmake /f Makefile
 > nmake /f Makefile install
+```
 
 #### Test the installation
 
