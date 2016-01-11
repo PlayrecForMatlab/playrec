@@ -102,15 +102,15 @@ environment variables
 ##### Windows with Visual Studio
 Suggested directory structure for FindPortaudio.cmake 
 ```
------ portaudio  ----- portaudio
-     |                           |
-     |                           -- ASIOSDK2.3
-     |                           |
-     |                           -- build
-     |                           -- lib
-     |                           -- bin
-     |                           -- include
-      -- playrec
+--- portaudio --- portaudio
+ |              |
+ |              -- ASIOSDK2.3
+ |              |
+ |              -- build
+ |              -- lib
+ |              -- bin
+ |              -- include
+ -- playrec
 ```
 Thus download and uncompress portaudio and asiosdk accordingly from
 http://www.portaudio.com/archives/pa_snapshot.tgz and http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip
