@@ -17,9 +17,12 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
         find_path(OCTAVE_INCLUDE_DIR
         NAMES mex.h
         PATHS
+        $ENV{OCTAVE_ROOT}/include/octave-3.8.1/octave
         $ENV{OCTAVE_ROOT}/include/octave-4.0.0/octave
+        /usr/local/include/octave-3.8.1/octave
         /usr/local/include/octave-4.0.0/octave
-        NO_DEFAULT_PATH)
+        /usr/include/octave-3.8.1/octave
+        /usr/include/octave-4.0.0/octave)
         set(OCTAVE_INCLUDE_DIRS ${OCTAVE_INCLUDE_DIR})
         
         if (WIN32 AND (NOT MINGW)) #Windows seems to have problems with find_library
@@ -27,7 +30,8 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
             NAMES
             liboctave.lib           
             PATHS
-            $ENV{OCTAVE_ROOT}/lib/octave/4.0.0)
+            $ENV{OCTAVE_ROOT}/lib/octave/3.8.1
+	    $ENV{OCTAVE_ROOT}/lib/octave/4.0.0)
 
             set(OCTAVE_LIBRARIES 
                 liboctave 
@@ -42,8 +46,10 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
             liboctave.lib liboctave.dylib liboctave.so liboctave.dll           
             PATHS
             $ENV{OCTAVE_ROOT}/lib/octave/4.0.0
-           /usr/local/lib/octave/4.0.0)
-            set(OCTAVE_LIBRARIES 
+            /usr/local/lib/octave/3.8.1
+            /usr/local/lib/octave/4.0.0
+	    /usr/lib/x86_64-linux-gnu)
+            set(OCTAVE_LIBRARIES
                 octave 
                 octinterp)        
             set(OCTAVE_COMP_FLAGS_RELEASE "-O3 -D_THREAD_SAFE -pthread -D_REENTRANT   -I.")
