@@ -13,16 +13,19 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
         MESSAGE(STATUS "OCTAVE_ROOT environment variable not set" )
         MESSAGE(STATUS "...Trying the usual paths" )
     endif("$ENV{OCTAVE_ROOT}" STREQUAL "" )
-          
+
+        FILE(GLOB system-oct1 "/usr/local/include/octave-*")
+        FILE(GLOB system-oct2 "/usr/include/octave-*")
+        FILE(GLOB system-oct3 "$ENV{OCTAVE_ROOT}/include/octave-*")
+        FILE(GLOB system-oct1-lib "/usr/local/lib/octave/*")
+        FILE(GLOB system-oct2-lib "$ENV{OCTAVE_ROOT}/lib/octave/*")
+
         find_path(OCTAVE_INCLUDE_DIR
         NAMES mex.h
         PATHS
-        $ENV{OCTAVE_ROOT}/include/octave-3.8.1/octave
-        $ENV{OCTAVE_ROOT}/include/octave-4.0.0/octave
-        /usr/local/include/octave-3.8.1/octave
-        /usr/local/include/octave-4.0.0/octave
-        /usr/include/octave-3.8.1/octave
-        /usr/include/octave-4.0.0/octave)
+        ${system-oct1}/octave
+        ${system-oct2}/octave
+        ${system-oct3}/octave)
         set(OCTAVE_INCLUDE_DIRS ${OCTAVE_INCLUDE_DIR})
         
         if (WIN32 AND (NOT MINGW)) #Windows seems to have problems with find_library
@@ -30,8 +33,8 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
             NAMES
             liboctave.lib           
             PATHS
-            $ENV{OCTAVE_ROOT}/lib/octave/3.8.1
-	    $ENV{OCTAVE_ROOT}/lib/octave/4.0.0)
+            ${system-oct1-lib}
+            ${system-oct2-lib})
 
             set(OCTAVE_LIBRARIES 
                 liboctave 
@@ -45,10 +48,10 @@ else (OCTAVE_LIBRARIES AND OCTAVE_INCLUDE_DIRS AND OCTAVE_MEX_SUFFIX)
             NAMES
             liboctave.lib liboctave.dylib liboctave.so liboctave.dll           
             PATHS
-            $ENV{OCTAVE_ROOT}/lib/octave/4.0.0
-            /usr/local/lib/octave/3.8.1
-            /usr/local/lib/octave/4.0.0
+            ${system-oct1-lib}
+            ${system-oct2-lib}
 	    /usr/lib/x86_64-linux-gnu)
+
             set(OCTAVE_LIBRARIES
                 octave 
                 octinterp)        
