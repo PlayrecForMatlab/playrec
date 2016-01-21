@@ -47,4 +47,114 @@ the need for reconfiguration.
 By using PortAudio to access the soundcard, Playrec should function on all 
 platforms and with all host APIs that PortAudio supports.
 
-To use this utility it must first be downloaded and compiled.
+### Download and compilation with cmake
+cmake based build will install playrec.mex to the top level of
+playrec source directory. It can be moved from there to desired location.
+
+Clone the playrec repository from github
+```
+% git clone git@github.com:hbe72/playrec.git
+```
+####Compilation with system's installation of portaudio
+
+#####Ubuntu:
+```
+% sudo apt-get install cmake 
+% sudo apt-get install portaudio19-dev
+% export MATLAB_ROOT=/opt/MATLAB/R2015b
+```
+
+#####Mac: 
+  Install homebrew install homebrew (see. brew.sh)
+```
+% brew install cmake
+% brew install portaudio
+% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app 
+```
+
+#####Compile:
+```
+
+% cd playrec 
+% mkdir build; cd build 
+% cmake .. 
+% make 
+% make install 
+```
+#### Compilation from scratch from portaudio sources:
+##### Ubuntu, Mac & MinGW
+```
+% mkdir portaudio; cd portaudio
+% ../playrec/compile_portaudio.sh [installation directory]
+```
+
+See further instructions from the end of compile_portaudio.sh for setting the
+environment variables
+```
+% export PKG_CONFIG_PATH=<absolute path to portaudio installation directory>/lib/pkgconfig:$PKG_CONFIG_PATH
+% export MATLAB_ROOT=/Applications/MATLAB_R2015b.app  
+% cd ../playrec 
+% mkdir build; cd build 
+% cmake .. 
+% make 
+% make install 
+```
+##### Windows with Visual Studio
+Suggested directory structure for FindPortaudio.cmake 
+```
+--- portaudio --- portaudio
+ |              |
+ |              -- ASIOSDK2.3
+ |              |
+ |              -- build
+ |              -- lib
+ |              -- bin
+ |              -- include
+ -- playrec
+```
+Thus download and uncompress portaudio and asiosdk accordingly from
+http://www.portaudio.com/archives/pa_snapshot.tgz and http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip
+
+Open "VS<version> x64 Cross Tools Command Prompt" and browse to
+portaudio subdirectory
+###### Build portaudio
+```
+> mkdir build
+> cd build
+> cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=<portaudio_install_dir> -DCMAKE_BUILD_TYPE=Release ../portaudio
+> nmake /f Makefile
+> nmake /f Makefile install
+```
+Thus installation is done to lib, bin and include subdirectories of
+portaudio_install_dir. portaudio_install_dir has to be absolute path
+to the portaudio subdirectory beside playrec subdirectory for
+FindPortaudio.cmake to find it.
+
+###### Build playrec
+Have MATLAB_ROOT environment variable point to Matlab installation directory
+```
+> cd ../../playrec
+> mkdir build
+> cd build
+> cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+> nmake /f Makefile
+> nmake /f Makefile install
+```
+
+#### Test the installation
+
+On Matlab command prompt at playrec directory:
+```
+>> playrec('about')
+```
+
+Clone playrec-examples from
+```
+% git clone git@github.com:PlayrecForMatlab/playrec-examples.git
+```
+
+Add playrec to Matlab path and execute test_playrec.m from
+playrec-examples directory
+```
+>> test_playrec
+```
