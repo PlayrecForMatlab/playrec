@@ -124,10 +124,10 @@ elseif is_os('WIN')
                         
     if ~isempty(sdk_path)
        api_include_dirs = [api_include_dirs,...
-                           resolve_paths(sdk_path, {'include', 'lib'})];
+                           resolve_paths(sdk_path, {'Include', 'Lib/x64'})];
        % Add library path, not using -L for backward compatibility,
        % apart from with octave that needs to use it
-       lib_dirs = [lib_dirs, resolve_paths(sdk_path, {'lib'})];
+       lib_dirs = [lib_dirs, resolve_paths(sdk_path, {'Lib/x64'})];
     end
 
     if use_asio
@@ -159,10 +159,10 @@ elseif is_os('WIN')
 
         % Add library path, not using -L for backward compatibility,
         % apart from with octave that needs to use it
-        if exist(resolve_paths(dsound_path, {'lib/x64'}),'dir')
-            lib_dirs = [lib_dirs, resolve_paths(dsound_path, {'lib/x64'})];
+        if exist(resolve_paths(dsound_path, {'Lib/x64'}),'dir')
+            lib_dirs = [lib_dirs, resolve_paths(dsound_path, {'Lib/x64'})];
         else
-            lib_dirs = [lib_dirs, resolve_paths(dsound_path, {'lib/x86'})];
+            lib_dirs = [lib_dirs, resolve_paths(dsound_path, {'Lib/x86'})];
         end
 
         compiler_flags = [compiler_flags, {'PA_USE_DS'}];

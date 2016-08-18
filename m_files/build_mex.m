@@ -91,7 +91,8 @@ if nargin > 5 && ~isempty(lib_dirs)
                 build_args = {build_args{:}, ['-L', cell2mat(lib_dirs(n))]};               
             else
                 %don't use -L prefix in Windows Matlab to make compatible with more versions of Matlab
-                build_args = {build_args{:}, ['LIB#', cell2mat(lib_dirs(n)), ';$LIB']};
+                %build_args = {build_args{:}, ['LIB#', cell2mat(lib_dirs(n)), ';$LIB']};
+                build_args = {build_args{:}, ['-L', cell2mat(lib_dirs(n))]};
             end
         else
             print_flush('build_mex: Unable to find ''%s''\n', cell2mat(lib_dirs(n)));
