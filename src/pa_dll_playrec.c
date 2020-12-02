@@ -81,7 +81,7 @@ const StateOptsStruct _stateOpts[] = {
     {BASIC_INIT,
         "Basic initialisation",
         "This should have started automatically - something must be wrong.",
-        "This state connot be stopped without clearing the utility from memory."},
+        "This state cannot be stopped without clearing the utility from memory."},
     {FULL_INIT,
         "Full initialisation",
         "Call \"init\" command to run initialisation.",
