@@ -43,8 +43,8 @@
  * Multiple states can be set at one time by using single bits for each state
  * If required more states can be used by adding an additional #define and
  * an additional element in _stateOpts[] for each state required.
-
-/*
+ *
+ *
  * BASIC_INIT = The exit function has been registered with mexAtExit.
  *              PortAudio has been succesfully initialised
  *              The state to return to on reset.
