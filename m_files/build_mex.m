@@ -140,8 +140,23 @@ if is_octave
     mex(build_args{:});
     failed = 0;
 else
-    failed = mex(build_args{:});
+    try
+        failed = mex(build_args{:});
+    catch 
+        if is_os('MAC')
+            % this is expected because of mex can't cope with linking to framework
+            fprintf('\n\nmex cannot include the required frameworks on macos\n')
+            fprintf('Try compiling again with verbose mode turned on.\n')
+            fprintf('The last command to run probably starts somethinng like...\n')
+            fprintf('\tusr/bin/xcrun -sdk macosx11.1 clang -Wl,\n')
+            fprintf('Copy and paste this line onto the terminal and insert the\n')
+            fprintf('following text just before "mex_dll_core.o"\n')
+            fprintf('\t-framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices\n')
+            fprintf('Running the modified link command should produce playrec.mexmaci\n\n')
+        end   
+    end
 end
+
 
 function print_flush(varargin)
 

@@ -16,13 +16,13 @@ if strcmpi(required_os, 'WIN')
 elseif strcmpi(required_os, 'MAC')
     % Older versions of Matlab don't have 'ismac', so assume
     % if ismac doesn't exist then it's not a mac!
-    if exist('ismac', 'builtin')
+    if exist('ismac')
     	ret_val = ismac;
     end
 elseif strcmpi(required_os, 'UNIX')
     % UNIX should not be true if it's a mac.
     ret_val = isunix;
-    if exist('ismac', 'builtin')
+    if exist('ismac')
         if ismac
             ret_val = 0;
         end
